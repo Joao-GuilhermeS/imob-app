@@ -1,0 +1,24 @@
+import random
+import string
+
+def generate_secure_password(length=12):
+  
+    if length < 4:
+        raise ValueError("O tamanho mínimo 4 s.")
+
+    # Garante que a senha terá pelo menos um caractere de cada tipo
+    password = [
+        random.choice(string.ascii_lowercase),
+        random.choice(string.ascii_uppercase),
+        random.choice(string.digits),
+        random.choice(string.punctuation)
+    ]
+
+    # Preenche o restante da senha com caracteres aleatórios
+    all_characters = string.ascii_letters + string.digits + string.punctuation
+    password += random.choices(all_characters, k=length - 4)
+    
+    # Embaralha a lista para evitar padrões previsíveis
+    random.shuffle(password)
+
+    return ''.join(password)
